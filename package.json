@@ -1,0 +1,30 @@
+{
+  "name": "my_pong",
+  "version": "1.0.0",
+  "description": "Creating a pong game with JS and HTML5",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danweinstock/my_pong.git"
+  },
+  "keywords": [
+    "HTML5",
+    "JS",
+    "SCSS",
+    "CSS",
+    "Webpack"
+  ],
+  "author": "Dan Weinstock",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danweinstock/my_pong/issues"
+  },
+  "homepage": "https://github.com/danweinstock/my_pong#readme",
+  "devDependencies": {
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.15.0"
+  }
+}
