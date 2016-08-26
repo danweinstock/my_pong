@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{
+			margin: 0px;
+			padding: 0px;
+		}
+		#myCanvas{
+			background: #663399;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="myCanvas" width="578" height="200"></canvas>	
+</body>
+<script>
+	window.requestAnimFrame = (function(callback){
+		return window.requestAnimationFrame || 
+		window.webkitRequestAnimationFrame ||
+		window.mozRequestAnimationFrame ||
+		window.oRequestAnimationFrame ||
+		window.msRequestAnimationFrame||
+			function(callback){
+				window.setTimeout(callback, 1000/60);
+			};
+	})();
+	var myRectangle = {
+		x:0,
+		y:75,
+		width:50,
+		height:50,
+		borderWidth:5
+	};
+	var canvas = document.getElementById('myCanvas');
+	var context = canvas.getContext('2d');
+
+	function drawRectangle(myRectangle, context){
+		// console.log("I am drawing the rectangle");
+		context.beginPath();
+		context.rect(myRectangle.x,myRectangle.y,myRectangle.width,myRectangle.height);
+		context.fillStyle = "#8ED6FF";
+		context.fill();
+		context.lineWidth = myRectangle.borderWidth;
+		context.strokeStyle = '#000000';
+		context.stroke();
+	}
+	drawRectangle(myRectangle,context);
+
+	function animate(myRectangle,canvas,context,startTime){
+		// console.log("I am starting the animation")
+		//update
+		var time = (new Date()).getTime() - startTime;
+
+		var dy = 5;
+	
+		//pixels/second
+		var newX = linearSpeed * time/1000;
+	
+		// console.log("I am storing the new x position in a rectangle")
+		if(newX < canvas.width - myRectangle.width - myRectangle.borderWidth /2 )
+		{
+			myRectangle.x = newX;
+			// console.log("I am erasing the whole canvas")
+			//erase the whole canvas
+			context.clearRect(0,0,canvas.width,canvas.height);
+			// console.log("I am going to redraw the rectangle at new x position")
+			drawRectangle(myRectangle,context);
+
+			
+		}
+		// console.log(newX + " " + canvas.width + " " + (canvas.width- myRectangle.width - myRectangle.borderWidth /2))
+		if(newX > canvas.width)
+		{
+			console.log("aljgalk")
+			myRectangle.x =  myRectangle-newX;
+			// console.log("I am erasing the whole canvas")
+			//erase the whole canvas
+			context.clearRect(0,0,canvas.width,canvas.height);
+			// console.log("I am going to redraw the rectangle at new x position")
+			drawRectangle(myRectangle,context);
+
+		}
+			requestAnimFrame(function(){
+				// console.log("I am going to refresh to browser frame")
+				animate(myRectangle,canvas,context,startTime);
+			});
+	}
+
+//wait one second before starting animation
+	var startAnimation = function(){
+		var theDate = new Date()
+		var startTime = theDate.getTime();
+		animate(myRectangle,canvas,context,startTime)
+	};
+	setTimeout(startAnimation, 1000);
+</script>
+</html>

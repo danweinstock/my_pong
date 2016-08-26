@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+		body{
+			margin: 0px;
+			padding: 0px;
+		}
+		#myCanvas{
+			background: #663399;
+		}
+	</style>
+<body>
+	<canvas id="myCanvas" width="512" height="256"></canvas>	
+</body>
+<script src="ballBounce.js"></script>
+<script>
+	window.requestAnimFrame = (function(callback){
+		return window.requestAnimationFrame || 
+		window.webkitRequestAnimationFrame ||
+		window.mozRequestAnimationFrame ||
+		window.oRequestAnimationFrame ||
+		window.msRequestAnimationFrame||
+			function(callback){
+				window.setTimeout(callback, 1000/60);
+			};
+	})();
+	var myPaddle = {
+		x:10,
+		y:75,
+		width:10,
+		height:50
+	}
+	
+	document.addEventListener("keydown", onKeyDown);
+	function onKeyDown(event){
+		console.log(event.keyCode)
+		if(event.keyCode == 38){
+			upPressed()
+		}
+	}
+	var canvas = document.getElementById('myCanvas');
+	var context = canvas.getContext('2d');
+
+	function drawPaddle(myPaddle,context){
+		context.beginPath();
+		context.rect(myPaddle.x,myPaddle.y,myPaddle.width,myPaddle.height);
+		context.fillStyle = "#8ED6FF";
+		context.fill();
+	}
+	drawPaddle(myPaddle,context);
+	function animate(myPaddle,canvas,context, startTime){
+		var time = (new Date()).getTime() - startTime;
+	}
+</script>
+</html>

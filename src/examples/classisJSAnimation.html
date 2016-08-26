@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#container{
+			width: 480px;
+			height: 400px;
+			position: relative;
+			background: yellow;
+		}
+		#animate{
+			width: 50px;
+			height: 50px;
+			position: absolute;;
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<p>
+		<button onclick="myMove()">Click Me</button>
+	</p>
+	<div id="demo"></div>
+	<div id="container">
+		<div id="animate">
+			
+		</div>
+	</div>
+</body>
+<script>
+
+function onKeyDown(event){
+	console.log("Key down function")
+	console.log("You pressed " + event.keyCode);
+	console.log(event.which)
+	if(event.keyCode == 38){console.log("you pressed UP!")}
+}
+// document.addEventListener("keypress",onKeyPress)
+document.addEventListener("keydown", onKeyDown)
+
+	function myMove(){
+		var elem = document.getElementById("animate");
+		var pos = 0;
+		var id = setInterval(frame,5);
+		function frame(){
+			if (pos == 350){
+				clearInterval(id);
+			}
+			else{
+				pos ++;
+				elem.style.top = pos + "px";
+				elem.style.left = pos + "px";
+			}
+		}
+	}
+</script>
+</html>

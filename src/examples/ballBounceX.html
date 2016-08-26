@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+       /* #myCanvas {
+            border: 1px solid green;
+        }*/
+    </style>
+</head>
+<body>
+<canvas id="myCanvas" width="512" height="256"></canvas>
+<script src="paddle.js"></script>
+<script>
+    /*
+    * requestAnimFrame is a property of window.
+    * It actually is a function.
+    * It takes a function as its argument
+    * The function will be called every time the window/browser 'refreshes'
+    * (think like an old school TV screen a particular frame of a movie)
+    * each frame is shown at frame rate relevant for that browser
+    * but instead of a new "frame" argument that is the function
+    * "renders" a new frame, i.e. drawing a new rectangle or whatever.
+    * */
+    window.requestAnimFrame = (function(callback) {
+        return window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                window.oRequestAnimationFrame ||
+                window.msRequestAnimationFrame ||
+                function(callback) {
+                    window.setTimeout(callback, 1000 / 60);
+                };
+    })();
+
+    var canvas = document.getElementById('myCanvas');
+    var context = canvas.getContext('2d');
+    // centreX and centreY are the initial coordinates of the ball
+    // wrt the centre of the ball.
+    var myPongBall = {
+        centreX: (canvas.width / 2),
+        centreY: (canvas.height  / 2),
+        ballRadius:10,
+        borderWidth: 2
+    };
+
+    function drawPongBall(myPongBall, context) {
+        context.beginPath();
+        context.arc(myPongBall.centreX, myPongBall.centreY,
+                myPongBall.ballRadius, 0, 2 * Math.PI, false);
+        context.fillStyle = '#8ED6FF';
+        context.fill();
+        context.lineWidth = myPongBall.borderWidth;
+        context.strokeStyle = 'black';
+        context.stroke();
+    }
+
+    drawPongBall(myPongBall, context);
+
+    var directionX = 1; // 1 is positive (to the right), -1 is to the left
+    var directionY = 1;
+    var speedX = 5; // set the ball's initial speed
+    var speedY = -3;
+    var pongBallX = myPongBall.centreX; // set the ball's initial x position;
+    var pongBallY = myPongBall.centreY; // set the ball's initial y position;
+    var myRectangle = {
+        x: 10,
+        y: 75,
+        width: 20,
+        height:100,
+        borderWidth: 1
+    };
+    var myRectangle02 = {
+        x: 450,
+        y: 75,
+        width: 20,
+        height:100,
+        borderWidth: 1
+    };
+
+
+
+    function checkIfBallHitsLeftOrRightEdge(currentX,currentY){
+        // console.log("checking for left/right edge collision.")
+        // how do we check for collision?
+        // TODO: with a paddle
+        // with a border
+        var rightEdge = canvas.width;
+        var leftEdge = 0;
+        // console.log("the currentX of target is " + currentX);
+        // console.log("the currentY of target is " + currentY);
+
+        // add compensation for pong ball's radius
+        if (directionX==1){
+            currentX = currentX + myPongBall.ballRadius;
+        }else{
+            currentX = currentX - myPongBall.ballRadius;
+        }
+      
+
+        var ballHitsRightEdge = (currentX>=rightEdge)?true:false;
+        var ballHitsLeftEdge = (currentX<=leftEdge)?true:false;
+
+        if(ballHitsLeftEdge || ballHitsRightEdge){
+            console.log("collision detected");
+            directionX = -directionX;
+        }
+
+    }
+
+    function checkIfBallHitsTopOrBottomEdge (currentX, currentY) {
+        var bottomEdge = canvas.height;
+        var topEdge = 0;
+        var ballHitsTopEdge = (currentY<=topEdge)?true:false
+        var ballHitsBottomEdge = (currentY>=bottomEdge)?true:false
+
+        if(ballHitsTopEdge || ballHitsBottomEdge){
+            directionY = -directionY;
+        }
+ 
+        //TODO: using the logic similar to checkIfBallHitsLeftOrRightEdge
+        // fill in the details for this method as well.
+    }
+
+
+    // wait one second before starting animation
+    setTimeout(animate, 1000,myPongBall,canvas,context);
+
+</script>
+</body>
+</html>
