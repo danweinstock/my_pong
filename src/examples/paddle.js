@@ -69,6 +69,6 @@ window.requestAnimFrame = (function(callback) {
                 break;
         }
     }
-
+    
     // listen for keypresses
     document.addEventListener("keydown",onKeyDown);

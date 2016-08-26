@@ -50,6 +50,7 @@ function animate(myPongBall, canvas, context) {
 		context.strokeStyle = 'green';
 		context.stroke();
  	}
+  
   drawRectangle(myRectangle,context);
   drawRectangle(myRectangle02,context);
   drawCourtEdge(context);
