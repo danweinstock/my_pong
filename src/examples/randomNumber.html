@@ -8,7 +8,11 @@
 </body>
 <script>
 	function randomIntBetween(min, max) {
-  return Math.round(Math.random() * (max - min) + min);
+		var base = Math.round(Math.random() * (max - min) + min);
+		if (base ===0){
+			base = 3
+		}
+		return base
 }
  
 console.log(randomIntBetween(-5,5));

@@ -41,16 +41,41 @@ function animate(myPongBall, canvas, context) {
       context.strokeStyle = 'black';
       context.stroke();
   }
- 	
- 	function drawNet(context){
- 		// context.setLineDash([15,15]);
-		context.moveTo(256,0);
-		context.lineTo(256,256);
-		context.lineWidth = 5;
-		context.strokeStyle = 'green';
-		context.stroke();
- 	}
   
+  function drawNet(context){
+    // context.setLineDash([15,15]);
+    context.moveTo(canvas.height,0);
+    context.lineTo(canvas.height,canvas.width/2);
+    context.lineWidth = 5;
+    context.strokeStyle = 'green';
+    context.stroke();
+  }
+  function checkIfBallHitsLeftPaddle () {
+        var topOfBall = myPongBall.centreY - myPongBall.ballRadius;
+        var bottomOfBall = myPongBall.centreY + myPongBall.ballRadius;
+        var topOfPaddle = myRectangle.y;
+        var bottomOfPaddle = myRectangle.y + myRectangle.height;
+        if ((myPongBall.centreX - myPongBall.ballRadius) == (myRectangle.x + 20)) {
+            console.log(bottomOfBall, topOfBall);
+            if ((topOfPaddle < topOfBall) && (bottomOfBall < bottomOfPaddle)) {
+                directionX = -directionX;
+                console.log('it registers paddle');
+            }
+        }
+    }
+    checkIfBallHitsLeftPaddle()
+  function checkIfBallHitsRightPaddle(){
+    var topOfBall = myPongBall.centreY - myPongBall.ballRadius;
+    var bottomOfBall = myPongBall.centreY + myPongBall.ballRadius;
+    var topOfPaddle = myRectangle02.y;
+    var bottomOfPaddle = myRectangle02.y + myRectangle.height;
+      if((myPongBall.centreX - myPongBall.ballRadius)==(myRectangle02.x - 20)){
+        if((topOfPaddle < topOfBall)&& (bottomOfBall < bottomOfPaddle)){
+          directionX = -directionX
+        }
+      }
+  }
+  checkIfBallHitsRightPaddle()
   drawRectangle(myRectangle,context);
   drawRectangle(myRectangle02,context);
   drawCourtEdge(context);

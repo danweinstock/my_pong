@@ -107,7 +107,7 @@ var scores = {playerOneScore: 0, playerTwoScore: 0}
 function drawPongBall(myPongBall, context) {
   context.beginPath();
   context.arc(myPongBall.centreX, myPongBall.centreY,myPongBall.ballRadius, 0, 2 * Math.PI, false);
-  context.fillStyle = '#8ED6FF';
+  context.fillStyle = '#551A8B';
 function drawCourtEdge(context){
   context.beginPath();
   context.strokeStyle = 'green';

@@ -1,4 +1,4 @@
-window.requestAnimFrame = (function(callback) {
+  window.requestAnimFrame = (function(callback) {
   return window.requestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
     window.mozRequestAnimationFrame ||
@@ -25,8 +25,8 @@ var scores = {playerOneScore: 0, playerTwoScore: 0}
   function drawScore(context){
     context.fillStyle= 'red';
     context.font = "20px Arial"
-    context.fillText('Score: '+scores.playerOneScore, 20, 30);
-    context.fillText('Score: '+scores.playerTwoScore, 380, 30);
+    context.fillText('Score: '+scores.playerOneScore, canvas.width*1/4, 30);
+    context.fillText('Score: '+scores.playerTwoScore, canvas.width*3/4, 30);
   }
 function drawPongBall(myPongBall, context) {
   context.beginPath();
@@ -48,7 +48,7 @@ drawPongBall(myPongBall, context);
 var directionX = 1; // 1 is positive (to the right), -1 is to the left
 var directionY = 1;
 var speedX = 5; // set the ball's initial speed
-var speedY = -3;
+var speedY = 6;
 var pongBallX = myPongBall.centreX; // set the ball's initial x position;
 var pongBallY = myPongBall.centreY; // set the ball's initial y position;
 

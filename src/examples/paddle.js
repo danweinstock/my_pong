@@ -1,4 +1,5 @@
-window.requestAnimFrame = (function(callback) {
+
+  window.requestAnimFrame = (function(callback) {
   return window.requestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
     window.mozRequestAnimationFrame ||
@@ -10,23 +11,23 @@ window.requestAnimFrame = (function(callback) {
   })();
 
     // adjusted height, width and borderwidth to make it look like a paddle
+    var canvas = document.getElementById('myCanvas');
+    var context = canvas.getContext('2d');
     var myRectangle = {
         x: 10,
-        y: 75,
+        y: canvas.height/2-50,
         width: 20,
         height:100,
         borderWidth: 1
     };
     var myRectangle02 = {
-        x: 450,
-        y: 75,
+        x: canvas.width-30,
+        y: canvas.height/2-50,
         width: 20,
         height:100,
         borderWidth: 1
     };
   
-    var canvas = document.getElementById('myCanvas');
-    var context = canvas.getContext('2d');
 
     function movePaddle(someRectangle, canvas, context,newPosition) {
         // console.log("I am starting the animation. the newPosition is " +newPosition);
